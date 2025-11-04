@@ -1,0 +1,335 @@
+```yaml
+openapi: 3.0.0
+info:
+  title: Alejandro Retro Gaming Market API
+  version: 1.0.0
+  description: API para el marketplace de juegos retro "Retro Hub".
+servers:
+  - url: https://api.retrohub.com/v1
+
+paths:
+  /auth/register:
+    post:
+      summary: Registra un nuevo usuario
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  example: nuevo_usuario
+                email:
+                  type: string
+                  format: email
+                  example: usuario@email.com
+                password:
+                  type: string
+                  format: password
+                  example: contraseña_segura
+      responses:
+        '201':
+          description: Usuario creado
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  userId:
+                    type: string
+                    format: uuid
+                    example: "uuid-1234-abcd"
+                  username:
+                    type: string
+                    example: "nuevo_usuario"
+  /auth/login:
+    post:
+      summary: Autentica a un usuario
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  format: email
+                  example: usuario@email.com
+                password:
+                  type: string
+                  format: password
+                  example: contraseña_segura
+      responses:
+        '200':
+          description: Login exitoso
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  accessToken:
+                    type: string
+                    example: "ey..."
+                  userId:
+                    type: string
+                    format: uuid
+                    example: "uuid-1234-abcd"
+  /users/{userId}:
+    get:
+      summary: Obtiene el perfil público de un usuario
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Perfil del usuario
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  userId:
+                    type: string
+                    format: uuid
+                  username:
+                    type: string
+                  joinDate:
+                    type: string
+                    format: date-time
+                  isVerifiedSeller:
+                    type: boolean
+                  sellerRating:
+                    type: number
+                    format: float
+  /listings:
+    post:
+      summary: Crea un nuevo anuncio
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                description:
+                  type: string
+                console:
+                  type: string
+                condition:
+                  type: string
+                price:
+                  type: number
+                  format: float
+                imageUrls:
+                  type: array
+                  items:
+                    type: string
+                    format: url
+      responses:
+        '201':
+          description: Anuncio creado
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  listingId:
+                    type: string
+                    format: uuid
+                  status:
+                    type: string
+    get:
+      summary: Obtiene una lista de anuncios
+      parameters:
+        - name: search
+          in: query
+          schema:
+            type: string
+        - name: console
+          in: query
+          schema:
+            type: string
+        - name: minPrice
+          in: query
+          schema:
+            type: integer
+        - name: maxPrice
+          in: query
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Lista de anuncios
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        listingId:
+                          type: string
+                          format: uuid
+                        title:
+                          type: string
+                        price:
+                          type: number
+                          format: float
+                        thumbnailUrl:
+                          type: string
+                          format: url
+                        seller:
+                          type: object
+                          properties:
+                            username:
+                              type: string
+                            isVerified:
+                              type: boolean
+                  page:
+                    type: integer
+                  totalPages:
+                    type: integer
+  /listings/{listingId}:
+    get:
+      summary: Obtiene los detalles de un anuncio
+      parameters:
+        - name: listingId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Detalles del anuncio
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Listing'
+  /orders:
+    post:
+      summary: Crea un pedido
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                listingId:
+                  type: string
+                  format: uuid
+                shippingAddressId:
+                  type: string
+                  format: uuid
+      responses:
+        '201':
+          description: Pedido creado
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  orderId:
+                    type: string
+                    format: uuid
+                  status:
+                    type: string
+                  totalAmount:
+                    type: number
+                    format: float
+                  paymentGatewayUrl:
+                    type: string
+                    format: url
+  /reviews:
+    post:
+      summary: Envía una valoración
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                orderId:
+                  type: string
+                  format: uuid
+                rating:
+                  type: integer
+                  minimum: 1
+                  maximum: 5
+                comment:
+                  type: string
+      responses:
+        '201':
+          description: Valoración creada
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reviewId:
+                    type: string
+                    format: uuid
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    Listing:
+      type: object
+      properties:
+        listingId:
+          type: string
+          format: uuid
+        title:
+          type: string
+        description:
+          type: string
+        console:
+          type: string
+        condition:
+          type: string
+        price:
+          type: number
+          format: float
+        imageUrls:
+          type: array
+          items:
+            type: string
+            format: url
+        seller:
+          type: object
+          properties:
+            userId:
+              type: string
+              format: uuid
+            username:
+              type: string
+            isVerifiedSeller:
+              type: boolean
+            sellerRating:
+              type: number
+              format: float
+```
