@@ -1,40 +1,18 @@
----
-id: EPIC-ARGM-001
-jira_id: null
-title: Gestión de Cuentas y Perfiles
-priority: High
-business_value: High
-estimated_story_points: 18
----
+# EPIC-ARGM-001: Gestión de Cuentas y Perfiles
 
-## Description
-Esta épica cubre todas las funcionalidades relacionadas con la creación, gestión y seguridad de las cuentas de usuario. Es la puerta de entrada para que los usuarios interactúen con la plataforma, ya sea como compradores o vendedores.
+## Descripción
+Como usuario, quiero poder gestionar mi cuenta y perfil para personalizar mi experiencia y mantener mi información actualizada.
 
-## Scope
-**In Scope:**
-- Registro de nuevos usuarios a través de correo electrónico.
-- Inicio y cierre de sesión seguro.
-- Perfil de usuario con información pública y privada.
-- Flujo de recuperación de contraseña.
+## Objetivos
+*   Permitir a los usuarios registrarse y autenticarse de forma segura.
+*   Ofrecer opciones para que los usuarios editen su información de perfil (nombre, correo electrónico, contraseña).
+*   Permitir la gestión de preferencias de notificación.
+*   Facilitar la visualización del historial de actividad del usuario.
 
-**Out of Scope:**
-- Registro o inicio de sesión con redes sociales (Google, Facebook, etc.).
-- Autenticación de dos factores (2FA).
-- Edición avanzada de perfiles (biografía, foto de portada, etc.).
-
-## Acceptance Criteria (Epic-level)
-- [ ] Un visitante puede crear una cuenta y convertirse en un usuario registrado.
-- [ ] Un usuario registrado puede iniciar y cerrar sesión de forma segura.
-- [ ] Cada usuario tiene un perfil que muestra su información relevante a la comunidad.
-- [ ] Un usuario que ha olvidado su contraseña puede recuperarla de forma autónoma.
-
-## Dependencies
-- **Épicas dependientes:** Ninguna. Esta es una épica fundamental.
-- **Recursos externos:** Servicio de envío de correo electrónico (para bienvenida y recuperación de contraseña).
-- **Technical pre-requisites:** Base de datos para almacenar la información de los usuarios.
-
-## User Stories
-- STORY-ARGM-001: Como nuevo usuario, quiero poder registrarme en la plataforma con mi correo electrónico y una contraseña para poder acceder a las funcionalidades de compra y venta. (3 pts)
-- STORY-ARGM-002: Como usuario registrado, quiero poder iniciar y cerrar sesión en mi cuenta de forma segura para gestionar mi actividad en la plataforma. (2 pts)
-- STORY-ARGM-003: Como usuario registrado, quiero tener un perfil público donde pueda ver mi reputación, mis artículos en venta y mis compras para construir confianza en la comunidad. (8 pts)
-- STORY-ARGM-004: Como usuario que ha olvidado su contraseña, quiero poder solicitar un restablecimiento de la misma a través de mi correo electrónico para recuperar el acceso a mi cuenta. (5 pts)
+## Historias de Usuario (User Stories)
+*   [HU-ARGM-001: Registro de Usuario](stories/HU-ARGM-001-registro-de-usuario.md)
+*   [HU-ARGM-002: Inicio de Sesión](stories/HU-ARGM-002-inicio-de-sesion.md)
+*   [HU-ARGM-003: Edición de Perfil](stories/HU-ARGM-003-edicion-de-perfil.md)
+*   [HU-ARGM-004: Recuperación de Contraseña](stories/HU-ARGM-004-recuperacion-de-contrasena.md)
+*   [HU-ARGM-005: Gestión de Preferencias](stories/HU-ARGM-005-gestion-de-preferencias.md)
+*   [HU-ARGM-006: Historial de Actividad](stories/HU-ARGM-006-historial-de-actividad.md)

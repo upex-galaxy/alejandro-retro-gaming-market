@@ -1,46 +1,37 @@
----
-id: STORY-ARGM-012
-jira_id: null
-epic_id: EPIC-ARGM-003
-title: Como comprador o vendedor, si surge un problema con una transacción, quiero poder abrir un caso de disputa para que el equipo de soporte de la plataforma medie y me ayude a resolverlo
-priority: Medium
-story_points: 5
-assignee: null
-status: To Do
----
+# User Story: Sistema de disputa de transacciones
 
-## Description
-Esta historia de usuario introduce un mecanismo de seguridad para compradores y vendedores: un sistema de disputas. Si un producto no llega, no es como se describió, o surge cualquier otro problema, cualquiera de las partes puede iniciar un proceso de mediación con el equipo de soporte de la plataforma.
+**ID:** STORY-ARGM-012
+**Título:** Sistema de disputa de transacciones
+**Épico:** EPIC-ARGM-003: Sistema de Confianza y Verificación
+**Prioridad:** HIGH
 
-## Acceptance Criteria (Gherkin format)
+## Descripción
 
-**Scenario 1: Abrir una disputa**
-- **Given:** Un comprador ha recibido un producto que no coincide con la descripción del anuncio.
-- **When:** Va a los detalles de su pedido y hace clic en "Abrir una Disputa". Rellena un formulario explicando el problema y adjunta fotos como prueba.
-- **Then:** Se crea un nuevo caso de disputa con el estado "Abierto", el vendedor es notificado, y el caso aparece en una cola para el equipo de soporte.
+Como comprador o vendedor, si surge un problema con una transacción, quiero poder abrir un caso de disputa para que el equipo de soporte de la plataforma pueda mediar y ayudarme a resolverlo.
 
-**Scenario 2: El equipo de soporte gestiona la disputa**
-- **Given:** Un caso de disputa ha sido abierto.
-- **When:** Un miembro del equipo de soporte revisa el caso, se comunica con ambas partes (fuera de la plataforma en el MVP, por correo) y toma una decisión (ej. reembolso parcial, devolución del producto).
-- **Then:** El administrador actualiza el estado de la disputa a "Resuelto" y registra la resolución en el sistema.
+## Criterios de Aceptación
 
-**Scenario 3: Visualización del estado de la disputa**
-- **Given:** Un comprador o vendedor ha abierto una disputa.
-- **When:** Va a su panel de control.
-- **Then:** Puede ver el estado actual de su disputa ("Abierto", "En Revisión", "Resuelto").
+*   Debe existir una opción clara para "Abrir Disputa" en el historial de transacciones o en la página de detalle de una transacción.
+*   Al abrir una disputa, el usuario debe poder:
+    *   Seleccionar el motivo de la disputa (ej. artículo no recibido, artículo no coincide con la descripción, problema con el pago).
+    *   Proporcionar una descripción detallada del problema.
+    *   Adjuntar pruebas (ej. fotos, capturas de pantalla, comunicaciones).
+*   Una vez abierta, la disputa debe ser visible para ambas partes (comprador y vendedor) y para el equipo de soporte de la plataforma.
+*   Debe haber un sistema de mensajería dentro del caso de disputa para que las partes y el soporte puedan comunicarse.
+*   El equipo de soporte debe poder:
+    *   Revisar toda la información y pruebas.
+    *   Mediar entre las partes.
+    *   Tomar una decisión final sobre la disputa (ej. reembolso, devolución, cierre sin acción).
+*   Ambas partes deben ser notificadas por correo electrónico sobre el progreso y la resolución de la disputa.
+*   El estado de la disputa debe ser visible en todo momento (ej. Abierta, En Revisión, Resuelta).
 
-## Technical Notes (iniciales)
-- Crear un modelo de datos para los casos de disputa, que debe estar asociado a una transacción, un comprador y un vendedor.
-- El formulario para abrir una disputa debe permitir adjuntar archivos (imágenes, PDFs).
-- Crear un panel de administración básico para que el equipo de soporte pueda ver y gestionar la cola de disputas.
-- Las notificaciones por correo electrónico son clave para mantener a las partes informadas del proceso.
+## Dependencias
 
-## Definition of Done
-- [ ] Código implementado y funcionando para el formulario de apertura de disputas.
-- [ ] Código implementado para el panel de administración de disputas.
-- [ ] Tests unitarios para la lógica de creación y cambio de estado de las disputas (cobertura > 80%).
-- [ ] Tests de integración para los endpoints de la API de disputas.
-- [ ] Tests E2E (Playwright) que simulen la apertura de una disputa por un usuario y su gestión por un admin.
-- [ ] Code review aprobado.
-- [ ] Documentación de la API y del proceso de gestión de disputas actualizada.
-- [ ] Desplegado en el entorno de staging.
+*   EPIC-ARGM-002: Marketplace: Compra y Venta (para las transacciones).
+*   EPIC-ARGM-001: Gestión de Cuentas y Perfiles (para la identificación de usuarios).
+
+## Notas Adicionales
+
+*   Definir políticas claras de resolución de disputas.
+*   Capacitar al equipo de soporte para manejar disputas de manera justa y eficiente.
+*   Considerar la automatización de ciertos tipos de disputas simples.

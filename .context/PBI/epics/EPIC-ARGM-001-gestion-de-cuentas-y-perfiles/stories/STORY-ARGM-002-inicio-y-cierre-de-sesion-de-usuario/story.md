@@ -1,44 +1,33 @@
----
-id: STORY-ARGM-002
-jira_id: null
-epic_id: EPIC-ARGM-001
-title: Como usuario registrado, quiero poder iniciar y cerrar sesión en mi cuenta de forma segura para gestionar mi actividad en la plataforma
-priority: High
-story_points: 2
-assignee: null
-status: To Do
----
+# User Story: Inicio y cierre de sesión de usuario
 
-## Description
-Esta historia de usuario permite a un usuario registrado autenticarse en la plataforma y cerrar su sesión de forma segura. Es fundamental para proteger la cuenta del usuario y permitirle acceder a las funcionalidades que requieren autenticación.
+**ID:** STORY-ARGM-002
+**Título:** Inicio y cierre de sesión de usuario
+**Épico:** EPIC-ARGM-001: Gestión de Cuentas y Perfiles
+**Prioridad:** CRITICAL
 
-## Acceptance Criteria (Gherkin format)
+## Descripción
 
-**Scenario 1: Inicio de sesión exitoso**
-- **Given:** Un usuario registrado se encuentra en la página de inicio de sesión.
-- **When:** Ingresa su correo electrónico y contraseña correctos.
-- **Then:** Es redirigido a su panel de control o a la página principal, y se muestra un indicador de que ha iniciado sesión.
+Como usuario registrado, quiero poder iniciar y cerrar sesión de forma segura en mi cuenta para gestionar mi actividad en la plataforma.
 
-**Scenario 2: Credenciales incorrectas**
-- **Given:** Un usuario registrado se encuentra en la página de inicio de sesión.
-- **When:** Ingresa una combinación de correo electrónico y/o contraseña incorrecta.
-- **Then:** Se muestra un mensaje de error indicando que las credenciales son inválidas y permanece en la página de inicio de sesión.
+## Criterios de Aceptación
 
-**Scenario 3: Cierre de sesión**
-- **Given:** Un usuario ha iniciado sesión en la plataforma.
-- **When:** Hace clic en el botón o enlace de "Cerrar Sesión".
-- **Then:** Su sesión se cierra, es redirigido a la página de inicio y ya no tiene acceso a las funcionalidades protegidas.
+*   El usuario debe poder acceder a una página de inicio de sesión.
+*   El formulario de inicio de sesión debe solicitar:
+    *   Correo electrónico.
+    *   Contraseña.
+*   Al introducir credenciales válidas, el usuario debe iniciar sesión exitosamente y ser redirigido a su panel de control o a la página principal.
+*   Si las credenciales son inválidas, el sistema debe mostrar un mensaje de error genérico (ej. "Correo electrónico o contraseña incorrectos").
+*   Debe existir un botón o enlace claro para "Cerrar Sesión" visible cuando el usuario esté autenticado.
+*   Al hacer clic en "Cerrar Sesión", la sesión del usuario debe finalizar de forma segura y el usuario debe ser redirigido a la página de inicio o de inicio de sesión.
+*   La sesión del usuario debe expirar automáticamente después de un período de inactividad configurable.
 
-## Technical Notes (iniciales)
-- Implementar un sistema de gestión de sesiones basado en tokens (e.g., JWT) o sesiones de servidor.
-- El token de autenticación debe tener un tiempo de expiración razonable.
-- Proteger las rutas y endpoints que requieran autenticación mediante middleware.
+## Dependencias
 
-## Definition of Done
-- [ ] Código implementado y funcionando para el inicio y cierre de sesión.
-- [ ] Tests unitarios para la lógica de autenticación (cobertura > 80%).
-- [ ] Tests de integración para los endpoints de login y logout.
-- [ ] Tests E2E (Playwright) que simulen el flujo completo de inicio y cierre de sesión.
-- [ ] Code review aprobado.
-- [ ] Documentación de la API de autenticación actualizada.
-- [ ] Desplegado en el entorno de staging.
+*   Base de datos de usuarios.
+*   Sistema de autenticación.
+
+## Notas Adicionales
+
+*   Implementar tokens de sesión seguros (ej. JWT) y manejo de cookies.
+*   Considerar la opción de "Recordarme" para persistencia de sesión (con las debidas precauciones de seguridad).
+*   Limitar intentos de inicio de sesión fallidos para prevenir ataques de fuerza bruta.

@@ -1,44 +1,34 @@
----
-id: STORY-ARGM-001
-jira_id: null
-epic_id: EPIC-ARGM-001
-title: Como nuevo usuario, quiero poder registrarme en la plataforma con mi correo electrónico y una contraseña para poder acceder a las funcionalidades de compra y venta
-priority: High
-story_points: 3
-assignee: null
-status: To Do
----
+# User Story: Registro de usuario con correo electrónico
 
-## Description
-Esta historia de usuario permite a un visitante crear una nueva cuenta en la plataforma utilizando su dirección de correo electrónico y estableciendo una contraseña. Es el primer paso para que un nuevo usuario se una a la comunidad.
+**ID:** STORY-ARGM-001
+**Título:** Registro de usuario con correo electrónico
+**Épico:** EPIC-ARGM-001: Gestión de Cuentas y Perfiles
+**Prioridad:** CRITICAL
 
-## Acceptance Criteria (Gherkin format)
+## Descripción
 
-**Scenario 1: Registro exitoso**
-- **Given:** Un visitante se encuentra en la página de registro.
-- **When:** Ingresa un nombre de usuario único, una dirección de correo electrónico válida y una contraseña de al menos 8 caracteres.
-- **Then:** Se crea una nueva cuenta de usuario, es redirigido a la página de inicio de sesión y recibe un correo electrónico de bienvenida.
+Como nuevo usuario, quiero poder registrarme en la plataforma con mi correo electrónico y una contraseña para acceder a las funcionalidades de compra y venta.
 
-**Scenario 2: Correo electrónico ya en uso**
-- **Given:** Un visitante se encuentra en la página de registro.
-- **When:** Ingresa una dirección de correo electrónico que ya está registrada en la plataforma.
-- **Then:** Se muestra un mensaje de error indicando que el correo electrónico ya está en uso y no se crea la cuenta.
+## Criterios de Aceptación
 
-**Scenario 3: Contraseña inválida**
-- **Given:** Un visitante se encuentra en la página de registro.
-- **When:** Ingresa una contraseña con menos de 8 caracteres.
-- **Then:** Se muestra un mensaje de error indicando que la contraseña no cumple con los requisitos de seguridad y no se crea la cuenta.
+*   El usuario debe poder acceder a una página de registro.
+*   El formulario de registro debe solicitar:
+    *   Correo electrónico (único y válido).
+    *   Contraseña (con requisitos de seguridad: mínimo 8 caracteres, al menos una mayúscula, una minúscula, un número y un carácter especial).
+    *   Confirmación de contraseña.
+*   El sistema debe validar el formato del correo electrónico y la fortaleza de la contraseña en tiempo real.
+*   Al enviar el formulario, si los datos son válidos, el usuario debe ser registrado exitosamente.
+*   El usuario debe recibir un correo electrónico de verificación para activar su cuenta.
+*   Hasta que la cuenta no esté verificada, el usuario no podrá realizar acciones de compra/venta.
+*   En caso de datos inválidos o correo ya registrado, el sistema debe mostrar mensajes de error claros y específicos.
+*   El usuario debe ser redirigido a la página de inicio de sesión o a una página de confirmación de registro después de un registro exitoso.
 
-## Technical Notes (iniciales)
-- Utilizar un sistema de hashing seguro (e.g., bcrypt) para almacenar las contraseñas en la base de datos.
-- Implementar validación en el lado del cliente y del servidor para los campos del formulario.
-- El servicio de correo electrónico debe ser un componente modular para poder cambiar de proveedor si es necesario.
+## Dependencias
 
-## Definition of Done
-- [ ] Código implementado y funcionando para el registro de usuarios.
-- [ ] Tests unitarios que cubran los escenarios de éxito y error (cobertura > 80%).
-- [ ] Tests de integración que verifiquen la creación del usuario en la base de datos.
-- [ ] Tests E2E (Playwright) que simulen el flujo completo de registro.
-- [ ] Code review aprobado por al menos un miembro del equipo.
-- [ ] Documentación de la API de registro actualizada.
-- [ ] Desplegado en el entorno de staging para pruebas.
+*   Servicio de envío de correos electrónicos.
+*   Base de datos de usuarios.
+
+## Notas Adicionales
+
+*   Considerar CAPTCHA para prevenir registros automatizados.
+*   Implementar cifrado de contraseñas en la base de datos.
