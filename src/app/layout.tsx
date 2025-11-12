@@ -1,12 +1,16 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import "@/styles/globals.css";
+import "./../styles/globals.css";
+import { cn } from "@/lib/utils";
 
-const inter = Inter({ subsets: ["latin"] });
+const fontSans = Inter({
+  subsets: ["latin"],
+  variable: "--font-sans",
+});
 
 export const metadata: Metadata = {
-  title: "Retro Gaming Market",
-  description: "Compra y vende artículos de gaming retro",
+  title: "Retro Hub - Tu Mercado de Gaming Retro",
+  description: "Compra y vende consolas y videojuegos retro con confianza.",
 };
 
 export default function RootLayout({
@@ -15,8 +19,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es">
-      <body className={inter.className}>{children}</body>
+    <html lang="es" style={{ backgroundColor: '#F9FAFB' }}> {/* Force background color directly */}
+      <body
+        className={cn(
+          "min-h-screen font-sans antialiased",
+          fontSans.variable
+        )}
+      >
+        {children}
+      </body>
     </html>
   );
 }

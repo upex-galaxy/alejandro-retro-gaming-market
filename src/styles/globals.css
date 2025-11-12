@@ -2,7 +2,51 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  background: linear-gradient(to right, #4c2882, #2a2a72);
-  color: white;
+@layer base {
+  :root {
+    --background: 210 17% 98%;
+    --foreground: 215 28% 17%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 215 28% 17%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 215 28% 17%;
+
+    --primary: 27 95% 53%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 215 14% 34%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+
+    --accent: 45 93% 62%;
+    --accent-foreground: 215 28% 17%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 27 95% 53%;
+
+    --radius: 1rem; /* Playful style */
+  }
+
+  .dark {
+    /* Dark mode colors can be defined here later */
+  }
+}
+
+@layer base {
+  * {
+    
+  }
+  body {
+    background-color: hsl(var(--background)); /* Revert to custom background */
+    color: hsl(var(--foreground));
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
 }
