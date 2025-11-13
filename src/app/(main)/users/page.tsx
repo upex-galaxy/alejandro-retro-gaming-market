@@ -1,15 +1,19 @@
 import Link from 'next/link';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
-function UserCard({ id, name, avatar }: { id: string; name: string; avatar: string }) {
+function getInitials(name: string): string {
+  const parts = name.split(' ');
+  if (parts.length === 0) return '';
+  if (parts.length === 1) return parts[0].charAt(0).toUpperCase();
+  return (parts[0].charAt(0) + parts[1].charAt(0)).toUpperCase();
+}
+
+function UserCard({ id, name }: { id: string; name: string }) {
   return (
     <div className="relative group border rounded-lg p-4 flex items-center gap-4 bg-white/10">
-      <img
-        src={avatar}
-        alt={name}
-        width={64}
-        height={64}
-        className="object-cover w-16 h-16 rounded-full"
-      />
+      <Avatar className="w-16 h-16">
+        <AvatarFallback>{getInitials(name)}</AvatarFallback>
+      </Avatar>
       <div>
         <h3 className="font-semibold tracking-tight text-white">{name}</h3>
         <Link href={`/profile/${id}`} className="text-sm text-gray-300 hover:underline" prefetch={false}>
@@ -22,10 +26,10 @@ function UserCard({ id, name, avatar }: { id: string; name: string; avatar: stri
 
 export default function UsersPage() {
   const users = [
-    { id: '1', name: 'RetroGamer123', avatar: 'https://source.unsplash.com/random/64x64/?gamer,avatar' },
-    { id: '2', name: 'PixelPete', avatar: 'https://source.unsplash.com/random/64x64/?gamer,avatar,man' },
-    { id: '3', name: '8BitBelle', avatar: 'https://source.unsplash.com/random/64x64/?gamer,avatar,woman' },
-    { id: '4', name: 'ConsoleKing', avatar: 'https://source.unsplash.com/random/64x64/?gamer,avatar,king' },
+    { id: '1', name: 'RetroGamer123' },
+    { id: '2', name: 'PixelPete' },
+    { id: '3', name: '8BitBelle' },
+    { id: '4', name: 'ConsoleKing' },
   ];
 
   return (

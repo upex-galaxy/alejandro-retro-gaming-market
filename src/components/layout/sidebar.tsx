@@ -26,7 +26,7 @@ export function Sidebar() {
   return (
     <div
       className={cn(
-        "relative hidden h-screen md:flex flex-col border-r bg-muted/40 transition-all duration-300 ease-in-out",
+        "relative hidden h-screen md:flex flex-col border-r bg-muted transition-all duration-300 ease-in-out",
         isCollapsed ? "w-20" : "w-64"
       )}
     >

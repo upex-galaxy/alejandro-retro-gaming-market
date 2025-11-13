@@ -19,7 +19,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es" style={{ backgroundColor: '#F9FAFB' }}> {/* Force background color directly */}
+    <html lang="es"> {/* Force background color directly */}
       <body
         className={cn(
           "min-h-screen font-sans antialiased",

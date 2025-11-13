@@ -4,7 +4,7 @@
 
 @layer base {
   :root {
-    --background: 210 17% 98%;
+    --background: 27 95% 50%; /* Darker orange background */
     --foreground: 215 28% 17%;
 
     --card: 0 0% 100%;
@@ -44,8 +44,14 @@
   * {
     
   }
+  html {
+    background-color: transparent;
+  }
+  html, body {
+    height: 100%;
+  }
   body {
-    background-color: hsl(var(--background)); /* Revert to custom background */
+    background: linear-gradient(to right, hsl(var(--primary)), hsl(var(--destructive))) !important;
     color: hsl(var(--foreground));
     font-feature-settings: "rlig" 1, "calt" 1;
   }
